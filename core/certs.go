@@ -36,6 +36,8 @@ func loadKongCerts(config *tomlConfig, url string, secretBaseURL string, c *http
 		Snis: []string{config.SecretService.SNIS},
 	}
 
+	lc.Info(fmt.Sprintf("posting body: %+v", body))
+
 	lc.Info("Trying to upload cert to proxy server.")
 	req, err := sling.New().Base(url).Post(CertificatesPath).BodyForm(body).Request()
 	resp, err := c.Do(req)
